@@ -8,7 +8,7 @@ end
 gem 'rest-client'
 gem "oauth2"
 gem 'simple_form'
-gem 'bootstrap', '~> 4.0.0'
+gem 'bootstrap', '~> 4.3.1'
 gem 'jquery-rails'
 gem 'mini_racer'
 gem "cancan"
