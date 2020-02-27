@@ -1,0 +1,59 @@
+<div id= "widgets">
+	<div class = "row">
+    <%@widgets.each do |widget|%>
+    	<div class = "col-lg-4 mt-20" style = "margin-bottom: 10px"> 
+				<div class="card bg-light" style="width: 18rem;">
+			  	<div class= "card-header">
+			    	<h5 class="card-title"><%= widget.name%></h5>
+			    </div>
+				  <div class="card-body bg-light">
+					  <p class= "card-text" style = "font-family: 'Calibri','Slate Pro','sans-serif' !important; color:#262626; font-size: 16px!important "><%=widget.description%></p>
+				  </div>
+				  <div class = "card-footer">
+				    <p>by <a href=<%= "/users/#{widget.user[:id]}/widgets"%> class="card-link"><%= image_tag widget.user[:images][:small_url], class: "img-circle", height:"30", width:"30" %><%= widget.user[:name]%></a> </p>
+				  </div>
+
+				  <% if widget.owner %>
+				  	<button class = "btn btn-primary" data-toggle="modal" data-target = <%= "#widgetEditModal#{widget.id}"%> >Edit</button>
+							<div class="container">
+							  <!-- The Modal -->
+							  <div class="modal" id=<%="widgetEditModal#{widget.id}"%>>
+							    <div class="modal-dialog">
+							      <div class="modal-content">
+							      
+							        <!-- Modal Header -->
+							        <div class="modal-header">
+							          <h4 class="modal-title">Widget</h4>
+							          <button type="button" class="close" data-dismiss="modal">&times;</button>
+							        </div>
+							        
+							        <!-- Modal body -->
+							        <div class="modal-body">
+												<%= simple_form_for(widget, :url => widget_path(widget.id), method: :put, wrapper: :vertical_form) do |f| %>
+												  <%= f.error_notification %>
+												  <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
+
+												  <div class="form-inputs">
+												    <%= f.input :name, required: true %>
+												    <%= f.input :description, required: true %>
+												  	<%= f.input :kind, :collection => [['visible','visible'],['hidden', 'hidden']], required: true %>
+												  </div>
+
+												  <div class="form-actions">
+												    <%= f.button :submit, "Update Widget", class:"btn-primary" %>
+												  </div>
+												<% end %>
+
+							        </div>
+							        
+							      </div>
+							    </div>
+							  </div>
+							</div>
+				  	  <%= link_to 'Delete', widget_path(widget.id), class: "btn btn-danger", method: :delete %>
+				  <% end %>
+				</div>
+			</div>
+    <%end%>
+	</div>
+</div>

@@ -1,0 +1,14 @@
+development:
+  url: 'https://widget-wall.herokuapp.com'
+  client_id: "AQx63ird8tsDlC90xlwQtQqI8P2A5gILDCH0B6yhlHM"
+  client_secret:  "13sHS_3tiAG5hmQ6ihWD8qbrnRP76LQo9niN-Dphr-Y"
+
+test:
+  url: 'https://showoff-rails-react-production.herokuapp.com'
+  client_id: "AQx63ird8tsDlC90xlwQtQqI8P2A5gILDCH0B6yhlHM"
+  client_secret:  "13sHS_3tiAG5hmQ6ihWD8qbrnRP76LQo9niN-Dphr-Y"
+
+production:
+  url: 'https://widget-wall.herokuapp.com'
+  client_id: "AQx63ird8tsDlC90xlwQtQqI8P2A5gILDCH0B6yhlHM"
+  client_secret:  "13sHS_3tiAG5hmQ6ihWD8qbrnRP76LQo9niN-Dphr-Y"

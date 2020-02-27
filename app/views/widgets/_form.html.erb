@@ -1,0 +1,14 @@
+<%= simple_form_for(widget, wrapper: :vertical_form) do |f| %>
+  <%= f.error_notification %>
+  <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
+
+  <div class="form-inputs">
+    <%= f.input :name, required: true %>
+    <%= f.input :description, required: true %>
+  	<%= f.input :kind, :collection => [['visible','visible'],['hidden', 'hidden']], required: true %>
+  </div>
+
+  <div class="form-actions">
+    <%= f.button :submit, class:"btn-primary" %>
+  </div>
+<% end %>
