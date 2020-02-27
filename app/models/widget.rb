@@ -1,23 +1,27 @@
 class Widget
 	include Api::Resource
 
-	attr_accessor :id, :name, :description, :kind, :user, :owner
+	attr_accessor :id, :name, :description, :kind, :user, :owner, :created_at, :updated_at
 
 	def attributes
 		{
 			name: nil,
 			description: nil,
-			kind:nil
+			kind:nil,
+			created_at: nil,
+			updated_at: nil,
+			user: nil
 		}
 	end
 
 	def self.all(type, term = '', current_user)
-		if type == "visible"
-			response = self.execute(:get, "/api/v1/widgets/visible?term=#{term}&client_id=#{CLIENT_ID}&client_secret=#{CLIENT_SECRET}", {})
-		else
-			response = self.execute(:get, "/api/v1/widgets", current_user.serializable_hash)
-		end
+		header = { Authorization: "Bearer #{current_user.access_token}"}
 
+		if type == "visible"
+			response = self.execute(:get, "/api/v1/widgets/visible?term=#{term}&client_id=#{CLIENT_ID}&client_secret=#{CLIENT_SECRET}", {}, header)
+		else
+			response = self.execute(:get, "/api/v1/widgets", current_user.serializable_hash, header)
+		end
 		widgets = response[:data][:widgets].map{|widget| Widget.new(widget)}
 		return widgets
 		rescue RestClient::UnprocessableEntity => exception

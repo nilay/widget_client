@@ -10,7 +10,7 @@
 					  <p class= "card-text" style = "font-family: 'Calibri','Slate Pro','sans-serif' !important; color:#262626; font-size: 16px!important "><%=widget.description%></p>
 				  </div>
 				  <div class = "card-footer">
-				    <p>by <a href=<%= "/users/#{widget.user[:id]}/widgets"%> class="card-link"><%= image_tag widget.user[:images][:small_url], class: "img-circle", height:"30", width:"30" %><%= widget.user[:name]%></a> </p>
+				    <p>by <a href=<%= "/users/#{widget.user[:id]}/widgets"%> class="card-link"><%= image_tag 'missing.png', class: "img-circle", height:"30", width:"30" %><%= widget.user[:name]%></a> </p>
 				  </div>
 
 				  <% if widget.owner %>

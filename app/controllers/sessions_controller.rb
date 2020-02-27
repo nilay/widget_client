@@ -6,10 +6,10 @@ class SessionsController < ApplicationController
   end
 
   def create
-    api_session = Session.new(params.require(:session).permit(:username, :password))
+    api_session = Session.new(params.require(:session).permit(:email, :password))
     result = api_session.create
     session[:user_information] = extract_user_information(result)
-    session[:user_information][:email] = params[:session][:username]
+    session[:user_information][:email] = params[:session][:email]
     flash[:success] = 'You have successfully signed in!'
     redirect_to resolve_landing_path
   rescue RestClient::Unauthorized

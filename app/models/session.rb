@@ -2,14 +2,14 @@ class Session
 
   include Api::Resource
 
-  attr_accessor :username
+  attr_accessor :email
 
   attr_accessor :password
 
   # validates_presence_of :email, :password
 
   def attributes
-    { username: nil,
+    { email: nil,
       password: nil }
   end
 
@@ -25,6 +25,11 @@ class Session
   end
 
   def create
-    self.class.execute(:post, '/oauth/token', self.serializable_hash.merge!({"grant_type": "password"}))
+    configuration = YAML.load_file("#{Rails.root}/config/api.yml")[Rails.env]
+    self.class.execute(:post, '/oauth/token', self.serializable_hash.merge!({
+                                                                                "grant_type": "password",
+                                                                                "client_id": configuration['client_id'],
+                                                                                client_secret: configuration['client_secret']
+                                                                            }))
   end
 end

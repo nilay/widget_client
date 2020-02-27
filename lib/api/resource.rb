@@ -41,7 +41,7 @@ module Api
         data.merge!(client_details)
 
         headers.merge!({"Content-Type":"application/json"})
-        
+
         parameters = []
         parameters.unshift(data) unless data.blank?
 
