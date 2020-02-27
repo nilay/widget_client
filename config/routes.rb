@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
   resources :sessions
-  root to: "home#index"
+  root to: "sessions#new"
   get "users/me" => "users#me"
   resources :users do 
   	member do
